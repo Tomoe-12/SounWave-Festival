@@ -44,7 +44,7 @@ npm run build
 
 This project was built step-by-step using parallel agent workflows. Refer to the corresponding logs in the root directory:
 
-*   **Step 1 Setup:** [COORDINATION.md](file:///c:/Project/soundwave-festival/COORDINATION.md) (Architecture design, data contracts, and task allocation).
-*   **Step 2 & 3 Process:** [MERGE_LOG.md](file:///c:/Project/soundwave-festival/MERGE_LOG.md) (Parallel subagent sessions tracker, quota limit interventions, and conflict resolution logs).
-*   **Step 4 Takeaways:** [RETROSPECTIVE.md](file:///c:/Project/soundwave-festival/RETROSPECTIVE.md) (Technical orchestration recap, takeaways, and lessons learned).
+*   **Step 1 Setup:** [COORDINATION.md](./COORDINATION.md) (Architecture design, data contracts, and task allocation).
+*   **Step 2 & 3 Process:** [MERGE_LOG.md](./MERGE_LOG.md) (Parallel subagent sessions tracker, quota limit interventions, and conflict resolution logs).
+*   **Step 4 Takeaways:** [RETROSPECTIVE.md](./RETROSPECTIVE.md) (Technical orchestration recap, takeaways, and lessons learned).
 
