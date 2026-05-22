@@ -41,10 +41,10 @@ export default function Navbar() {
           {/* Logo / Brand */}
           <div className="flex items-center">
             <Link href="/" className="group flex items-center gap-2 cursor-pointer">
-              <span className="text-2xl font-black tracking-widest bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 bg-clip-text text-transparent group-hover:animate-pulse transition-all">
+              <span className="text-xl md:text-lg lg:text-2xl font-black tracking-widest bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 bg-clip-text text-transparent group-hover:animate-pulse transition-all">
                 🔊 SOUNDWAVE
               </span>
-              <span className="hidden sm:inline-block rounded-full bg-cyan-500/10 px-2.5 py-0.5 text-xs font-semibold text-cyan-400 border border-cyan-500/20">
+              <span className="hidden lg:inline-block rounded-full bg-cyan-500/10 px-2.5 py-0.5 text-xs font-semibold text-cyan-400 border border-cyan-500/20">
                 FESTIVAL
               </span>
             </Link>
@@ -52,14 +52,14 @@ export default function Navbar() {
 
           {/* Desktop Nav Links */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-1">
+            <div className="ml-4 lg:ml-8 flex items-center space-x-0.5 lg:space-x-1">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`relative rounded-md px-3 py-2 text-sm font-semibold transition-all duration-200 hover:text-cyan-400 cursor-pointer ${
+                    className={`relative rounded-md px-2 py-1.5 text-xs lg:px-3 lg:py-2 lg:text-sm font-semibold transition-all duration-200 hover:text-cyan-400 cursor-pointer ${
                       isActive
                         ? 'text-cyan-400 bg-cyan-500/5 shadow-[inset_0_0_10px_rgba(6,182,212,0.1)]'
                         : 'text-slate-300'
@@ -67,7 +67,7 @@ export default function Navbar() {
                   >
                     {link.name}
                     {isActive && (
-                      <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)] rounded-full" />
+                      <span className="absolute bottom-0 left-2 right-2 lg:left-3 lg:right-3 h-0.5 bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)] rounded-full" />
                     )}
                   </Link>
                 );
