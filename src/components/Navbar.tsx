@@ -2,13 +2,15 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
 
   const navLinks = [
+    { name: 'Home', href: '/' },
     { name: 'Lineup', href: '/lineup' },
     { name: 'Tickets', href: '/tickets' },
     { name: 'Venue Map', href: '/map' },
@@ -16,13 +18,29 @@ export default function Navbar() {
     { name: 'Lost & Found', href: '/lost-found' },
   ];
 
+  // Close the mobile dropdown when clicking outside of the navbar
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-cyan-500/20 bg-slate-950/80 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.1)] shadow-cyan-500/5 transition-all duration-300">
+    <nav ref={navRef} className="sticky top-0 z-50 w-full border-b border-cyan-500/20 bg-slate-950/80 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.1)] shadow-cyan-500/5 transition-all duration-300">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo / Brand */}
           <div className="flex items-center">
-            <Link href="/" className="group flex items-center gap-2">
+            <Link href="/" className="group flex items-center gap-2 cursor-pointer">
               <span className="text-2xl font-black tracking-widest bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 bg-clip-text text-transparent group-hover:animate-pulse transition-all">
                 🔊 SOUNDWAVE
               </span>
@@ -41,7 +59,7 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`relative rounded-md px-3 py-2 text-sm font-semibold transition-all duration-200 hover:text-cyan-400 ${
+                    className={`relative rounded-md px-3 py-2 text-sm font-semibold transition-all duration-200 hover:text-cyan-400 cursor-pointer ${
                       isActive
                         ? 'text-cyan-400 bg-cyan-500/5 shadow-[inset_0_0_10px_rgba(6,182,212,0.1)]'
                         : 'text-slate-300'
@@ -62,7 +80,7 @@ export default function Navbar() {
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="inline-flex items-center justify-center rounded-md p-2 text-slate-400 hover:bg-slate-900 hover:text-white focus:outline-none transition-colors"
+              className="inline-flex items-center justify-center rounded-md p-2 text-slate-400 hover:bg-slate-900 hover:text-white focus:outline-none transition-colors cursor-pointer"
               aria-controls="mobile-menu"
               aria-expanded={isOpen}
             >
@@ -84,7 +102,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? 'max-h-64 border-t border-slate-800 bg-slate-950/95' : 'max-h-0'
+          isOpen ? 'max-h-80 border-t border-slate-800 bg-slate-950/95' : 'max-h-0'
         }`}
         id="mobile-menu"
       >
@@ -96,7 +114,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className={`block rounded-md px-3 py-2 text-base font-medium transition-colors ${
+                className={`block rounded-md px-3 py-2 text-base font-medium transition-colors cursor-pointer ${
                   isActive
                     ? 'bg-slate-900 text-cyan-400 border-l-2 border-cyan-400'
                     : 'text-slate-300 hover:bg-slate-900 hover:text-white'
